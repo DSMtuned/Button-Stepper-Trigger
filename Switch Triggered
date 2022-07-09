@@ -1,5 +1,7 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+#* text=auto
+
+
 # import the libraries
 import RPi.GPIO as GPIO
 from time import sleep
@@ -8,28 +10,26 @@ Switch = 26  # Switch Pin
 GPIO.setup(Switch, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Switch input pin with pull-up resistor            
 from RpiMotorLib import RpiMotorLib
 
+#define GPIO pins
+GPIO_pins = (25, 8, 7)    # Microstep Resolution MS1-MS3 -> GPIO Pin
+direction = 24               # Direction Pin, 
+step = 23                   # Step Pin
+               
 
 # Declare an named instance of class pass GPIO pins numbers
 mymotortest = RpiMotorLib.A4988Nema(direction, step, GPIO_pins, "A4988")
 
 
-#define GPIO pins
-GPIO_pins = (25, 8, 7)    # Microstep Resolution MS1-MS3 -> GPIO Pin
-direction= 24               # Direction Pin, 
-step = 23                   # Step Pin
-               
 
 
 
-      while True:
+
+while True:
             if GPIO.input (Switch) == 0:
                  mymotortest.motor_go(False, "Full" , 100, .01, False, .05)
                  sleep(0.2)
             else:
                 mymotortest.motor_go(True, "Full" , 100, .01, False, .05)
-                 sleep(0.2)
-
-            
-
+sleep(0.2)
 
 GPIO.cleanup()

@@ -29,14 +29,13 @@ try:
              buttonState=GPIO.input(Button)
              if buttonState==1 and buttonStateOld==0
 
-        # call the function, pass the arguments
 mymotortest.motor_go(False, "Full" , 100, .01, False, .05), GPIO.input (Button)
     buttonStateOld=buttonState
     
     
     else:
         mymotortest.motor_go(True, "Full" , 100, .01, False, .05)
-    time.sleep(1)
+    sleep(1)
 
 
 
